@@ -9,37 +9,44 @@ from tqdm import tqdm
 import librosa
 from librosa.util import example_info
 
+# def clean_text(text: str) -> str:
+#     # joki Linux Сі ХIХ
+#     import re
+#     text = text.lower()
+#     # Залишити тільки букви, апостроф і пробіли
+#     # text = re.sub(r"[^а-щьюяґєіїa-z0-9'՚`’\-\s]", "", text)
+#
+#     # Видалити символи
+#     text = re.sub(r"[,.!?:;_́«»“”„…\"]", "", text)
+#     text = re.sub(r"[`՚’]", "'", text)
+#     text = re.sub(r"[–—−‒]", "-", text)
+#     text = re.sub(r"\s-\s", " ", text)
+#     text = re.sub(r"-\s", " ", text)
+#     text = re.sub(r"\s-", " ", text)
+#     text = re.sub(r"joki", "йокі", text)
+#     text = re.sub(r"linux", "лінукс", text)
+#     text = re.sub(r"ci", "сі", text)
+#     text = re.sub(r"xix", "дев’ятнадцяте", text)
+#     #
+#     text = re.sub(r"a", "а", text)
+#     text = re.sub(r"c", "с", text)
+#     text = re.sub(r"e", "е", text)
+#     text = re.sub(r"i", "і", text)
+#     text = re.sub(r"m", "м", text)
+#     text = re.sub(r"o", "о", text)
+#     text = re.sub(r"p", "р", text)
+#     text = re.sub(r"x", "х", text)
+#     text = re.sub(r"y", "у", text)
+#     text = re.sub(r"ы", "и", text)
+#     # Прибрати зайві пробіли
+#     text = re.sub(r"\s+", " ", text).strip()
+#     return text
+
+
+symbols = "абвгдежзийклмнопрстуфхчцшщьюяєіїґ'- "
 def clean_text(text: str) -> str:
-    # joki Linux Сі ХIХ
-    import re
     text = text.lower()
-    # Залишити тільки букви, апостроф і пробіли
-    # text = re.sub(r"[^а-щьюяґєіїa-z0-9'՚`’\-\s]", "", text)
-    # Видалити символи
-    text = re.sub(r"[,.!?:;_́«»“”„…\"]", "", text)
-    text = re.sub(r"[`՚’]", "'", text)
-    text = re.sub(r"[–—−‒]", "-", text)
-    text = re.sub(r"\s-\s", " ", text)
-    text = re.sub(r"-\s", " ", text)
-    text = re.sub(r"\s-", " ", text)
-    text = re.sub(r"joki", "йокі", text)
-    text = re.sub(r"linux", "лінукс", text)
-    text = re.sub(r"ci", "сі", text)
-    text = re.sub(r"xix", "дев’ятнадцяте", text)
-    #
-    text = re.sub(r"a", "а", text)
-    text = re.sub(r"c", "с", text)
-    text = re.sub(r"e", "е", text)
-    text = re.sub(r"i", "і", text)
-    text = re.sub(r"m", "м", text)
-    text = re.sub(r"o", "о", text)
-    text = re.sub(r"p", "р", text)
-    text = re.sub(r"x", "х", text)
-    text = re.sub(r"y", "у", text)
-    text = re.sub(r"ы", "и", text)
-    # Прибрати зайві пробіли
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
+    return ''.join(ch for ch in text if ch in symbols)
 
 #Обробка аудіо і текстів
 def load_tsv(tsv_path: str, data_path: str, example_count: int) -> DataFrame:
